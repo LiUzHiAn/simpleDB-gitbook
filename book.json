@@ -1,0 +1,21 @@
+{
+    "title": "SimpleDB中文版",
+    "author": "刘知安",
+    "description": "SimpleDB中文版",
+    "language": "zh-hans",
+    "plugins": [
+        "katex",
+        "chapter-fold",
+        "page-treeview",
+        "advanced-emoji"
+    ],
+    "pluginsConfig": {
+        "page-treview": {
+            "copyright": "",
+            "style": "markdown",
+            "minHeaderCount": "2",
+            "minHeaderDeep": "2"
+        }
+    }
+
+}
