@@ -2,7 +2,7 @@ package simpledb.tx;
 
 
 import simpledb.buffer.ABCStringFormatter;
-import simpledb.buffer.;
+import simpledb.buffer.PageFormatter;
 import simpledb.file.Block;
 import simpledb.server.SimpleDB;
 
