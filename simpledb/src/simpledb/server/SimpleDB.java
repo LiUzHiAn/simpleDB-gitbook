@@ -30,7 +30,7 @@ public class SimpleDB {
         // 初始化文件管理器
         initFileMgr(dirName);
         // 初始化日志管理器  TODO
-        initLogMgr("testLog.log");
+        // initLogMgr("testLog.log");
         // 初始化缓冲管理器
         initBufferMgr(10);
 

@@ -3,7 +3,6 @@ package simpledb.file;
 import simpledb.server.SimpleDB;
 
 
-
 /**
  * @ClassName FileTest
  * @Deacription // TODO
@@ -44,6 +43,13 @@ public class FileTest {
             p4.read(blk);
             String s = p4.getString(20);
             assert (s.equals("hola"));
+
+            // 追加另一个block （即 block 2）
+            Page p5 = new Page();
+            p5.setInt(88, 1);
+            blk = p5.append("junk");
+            assert (p5.getInt(88) == 1);
+
 
         } catch (Exception e) {
             e.printStackTrace();

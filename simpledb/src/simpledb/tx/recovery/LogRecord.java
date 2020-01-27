@@ -16,5 +16,5 @@ public interface LogRecord {
     int writeToLog();
     int op();
     int txNumber();
-    void undo(int txNum);
+    void undo();
 }

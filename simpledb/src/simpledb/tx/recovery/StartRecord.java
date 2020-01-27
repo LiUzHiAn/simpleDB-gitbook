@@ -56,7 +56,7 @@ public class StartRecord implements LogRecord {
     }
 
     @Override
-    public void undo(int txNum) {
+    public void undo() {
         // 空方法即可
     }
 

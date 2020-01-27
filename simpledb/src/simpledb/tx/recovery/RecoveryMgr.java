@@ -41,6 +41,7 @@ public class RecoveryMgr {
      */
     public void commit() {
         SimpleDB.bufferMgr().flushAll(txNum);
+
         int lsn = new CommitRecord(txNum).writeToLog();
         SimpleDB.logMgr().flush(lsn);
     }
@@ -118,7 +119,7 @@ public class RecoveryMgr {
                     // 其实只有SetIntRecord和SetStringRecord
                     // 的undo()方法才有具体的实现，其他日志记录类
                     // 的undo()方法都是空方法。
-                    rec.undo(this.txNum);
+                    rec.undo();
             }
         }
 
@@ -151,7 +152,7 @@ public class RecoveryMgr {
                 // 其实只有SetIntRecord和SetStringRecord
                 // 的undo()方法才有具体的实现，其他日志记录类
                 // 的undo()方法都是空方法。
-                rec.undo(this.txNum);
+                rec.undo();
         }
     }
 

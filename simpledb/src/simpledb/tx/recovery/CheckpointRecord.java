@@ -56,7 +56,7 @@ public class CheckpointRecord implements LogRecord {
     }
 
     @Override
-    public void undo(int txNum) {
+    public void undo() {
         // empty is Okay
     }
 

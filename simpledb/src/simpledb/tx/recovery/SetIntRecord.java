@@ -70,7 +70,7 @@ public class SetIntRecord implements LogRecord {
     }
 
     @Override
-    public void undo(int txNum) {
+    public void undo() {
         BufferMgr bufferMgr = SimpleDB.bufferMgr();
         Buffer buffer = bufferMgr.pin(blk);
         buffer.setInt(offset, oldVal, myTxNum, -1);

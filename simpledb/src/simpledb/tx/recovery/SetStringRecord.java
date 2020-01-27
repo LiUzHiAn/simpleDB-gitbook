@@ -56,8 +56,8 @@ public class SetStringRecord implements LogRecord {
      */
     @Override
     public int writeToLog() {
-        Object[] rec = new Object[]{SETSTRING, myTxNum,
-                blk.filename(), offset, oldVal};
+        Object[] rec = new Object[]{SETSTRING, myTxNum, blk.filename(),
+                blk.number(), offset, oldVal};
 
         LogMgr logMgr = SimpleDB.logMgr();
         return logMgr.append(rec);
@@ -83,7 +83,7 @@ public class SetStringRecord implements LogRecord {
     }
 
     @Override
-    public void undo(int txNum) {
+    public void undo() {
         BufferMgr bufferMgr = SimpleDB.bufferMgr();
         Buffer buff = bufferMgr.pin(blk);
         buff.setString(offset, oldVal, myTxNum, -1);

@@ -20,29 +20,97 @@ public class TransactionTest {
 
     public static void main(String[] args) {
         SimpleDB.init("studentdb");
-        Transaction tx = new Transaction();
-        Block blk = new Block("junk", 3);
-        tx.pin(blk);
-        int n = tx.getInt(blk, 392);
-        String str = tx.getString(blk, 20);
-        tx.unpin(blk);
-        System.out.println("Values are " + n + " and " + str);
+        TestA tA = new TestA();
+        new Thread(tA).start();
+        TestB tB = new TestB();
+        new Thread(tB).start();
+        TestC tC = new TestC();
+        new Thread(tC).start();
+    }
+}
 
-        tx.pin(blk);
-        n = tx.getInt(blk, 392); // 这条语句必要吗？？？
-        tx.setInt(blk, 392, n + 1);
-        tx.unpin(blk);
+class TestA implements Runnable {
+    @Override
+    public void run() {
+        try {
+            Transaction tx = new Transaction();
+            Block blk1 = new Block("junk", 1);
+            Block blk2 = new Block("junk", 2);
+            tx.pin(blk1);
+            tx.pin(blk2);
+            System.out.println("Tx A: read block 1 start");
+            String blk_1_pos_20_val = tx.getString(blk1, 20);
+            System.out.println("Tx A  read block 1 at pos 20: "+blk_1_pos_20_val);
+            System.out.println("Tx A: read block 1 end");
 
-        PageFormatter pfmt = new ABCStringFormatter();
-        Block newBlk = tx.append("junk", pfmt);
-        tx.pin(newBlk);
-        String s = tx.getString(newBlk, 0);
-        assert (s.equals("abc"));
-        tx.unpin(newBlk);
-        int newBlkNum = newBlk.number();
-        System.out.println("The first string in block "
-                + newBlkNum + " is" + newBlkNum);
+            Thread.sleep(1000);
 
-        tx.commit();
+            System.out.println("Tx A: read block 2 start");
+            int blk_2_pos_88_val = tx.getInt(blk2, 88);
+            System.out.println("Tx A  read block 2 at pos 88: "+blk_2_pos_88_val);
+            System.out.println("Tx A: read block 2 end");
+
+            tx.commit();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class TestB implements Runnable {
+    @Override
+    public void run() {
+        try {
+            Transaction tx = new Transaction();
+            Block blk1 = new Block("junk", 1);
+            Block blk2 = new Block("junk", 2);
+            tx.pin(blk1);
+            tx.pin(blk2);
+
+            System.out.println("Tx B: write block 2 start");
+            tx.setInt(blk2, 88, 2);
+            System.out.println("Tx B write block 2 at pos 88 with value \'2\' success!");
+            System.out.println("Tx B: write block 2 end");
+
+            Thread.sleep(1000);
+
+            System.out.println("Tx B: read block 1 start");
+            String blk_1_pos_20_val = tx.getString(blk1, 20);
+            System.out.println("Tx B  read block 1 at pos 20: "+blk_1_pos_20_val);
+            System.out.println("Tx B: read block 1 end");
+
+            tx.commit();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class TestC implements Runnable {
+    @Override
+    public void run() {
+        try {
+            Transaction tx = new Transaction();
+            Block blk1 = new Block("junk", 1);
+            Block blk2 = new Block("junk", 2);
+            tx.pin(blk1);
+            tx.pin(blk2);
+
+            System.out.println("Tx C: write block 1 start");
+            tx.setString(blk1, 20, "hello");
+            System.out.println("Tx C write block 1 at pos 20 with value \'hello\' success!");
+            System.out.println("Tx C: write block 1 end");
+
+            Thread.sleep(1000);
+
+            System.out.println("Tx C: read block 2 start");
+            int blk_2_pos_88_val = tx.getInt(blk2, 88);
+            System.out.println("Tx C  read block 2 at pos 88: "+blk_2_pos_88_val);
+            System.out.println("Tx C: read block 2 end");
+
+            tx.commit();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
