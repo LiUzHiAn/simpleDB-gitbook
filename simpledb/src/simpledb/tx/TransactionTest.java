@@ -20,12 +20,9 @@ public class TransactionTest {
 
     public static void main(String[] args) {
         SimpleDB.init("studentdb");
-        TestA tA = new TestA();
-        new Thread(tA).start();
-        TestB tB = new TestB();
-        new Thread(tB).start();
-        TestC tC = new TestC();
-        new Thread(tC).start();
+        TestA tA = new TestA();new Thread(tA).start();
+        TestB tB = new TestB();new Thread(tB).start();
+        TestC tC = new TestC();new Thread(tC).start();
     }
 }
 
@@ -34,6 +31,7 @@ class TestA implements Runnable {
     public void run() {
         try {
             Transaction tx = new Transaction();
+            System.out.println("Tx A --> TxNum: "+tx.getTxNum());
             Block blk1 = new Block("junk", 1);
             Block blk2 = new Block("junk", 2);
             tx.pin(blk1);
@@ -62,6 +60,7 @@ class TestB implements Runnable {
     public void run() {
         try {
             Transaction tx = new Transaction();
+            System.out.println("Tx B --> TxNum: "+tx.getTxNum());
             Block blk1 = new Block("junk", 1);
             Block blk2 = new Block("junk", 2);
             tx.pin(blk1);
@@ -91,6 +90,7 @@ class TestC implements Runnable {
     public void run() {
         try {
             Transaction tx = new Transaction();
+            System.out.println("Tx C --> TxNum: "+tx.getTxNum());
             Block blk1 = new Block("junk", 1);
             Block blk2 = new Block("junk", 2);
             tx.pin(blk1);

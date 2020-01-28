@@ -26,27 +26,34 @@ public class Transaction {
     private BufferList myBuffers = new BufferList();
 
 
+
     public Transaction() {
         txNum = nextTxNumber();
         recoveryMgr = new RecoveryMgr(txNum);
         concurMgr = new ConcurrencyMgr();
+
+    }
+
+    public int getTxNum() {
+        return txNum;
     }
 
     public void commit() {
+        myBuffers.unpinAll();
         recoveryMgr.commit();
         concurMgr.release();
-        myBuffers.unpinAll();
         System.out.println("transaction " + txNum + " committed");
     }
 
     public void rollback() {
+        myBuffers.unpinAll();
         recoveryMgr.rollback();
         concurMgr.release();
-        myBuffers.unpinAll();
         System.out.println("transaction " + txNum + " rolled back");
     }
 
     public void recover(){
+        SimpleDB.bufferMgr().flushAll(txNum);
         recoveryMgr.recover();
     }
 
