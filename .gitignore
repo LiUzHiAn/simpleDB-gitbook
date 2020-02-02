@@ -1,7 +1,12 @@
+.DS_Store
+
+
 /_book
 
 /node_modules
 
+
+/simpledb/.DS_Store
 /simpledb/.idea/
 /simpledb/out/
 /simpledb/simpledb.iml

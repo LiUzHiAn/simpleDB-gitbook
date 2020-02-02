@@ -15,7 +15,7 @@ public class FileTest {
 
     public static void main(String[] args) {
         try {
-            SimpleDB.init("studentdb");
+            SimpleDB.init("liuzhian/studentdb");
 
             // 第0块
             Block blk = new Block("junk", 0);
