@@ -36,7 +36,7 @@ public class SetIntRecord implements LogRecord {
      * <p>
      * 注意，一条更新日志记录的格式为：
      * <p>
-     * <SETxxx,txNum,fileName,blkNum,offset,old value,new value>
+     * <SETxxx,txNum,fileName,blkNum,offset,old value>
      *
      * @param blr
      */

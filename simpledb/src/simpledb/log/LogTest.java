@@ -17,7 +17,7 @@ import java.util.Iterator;
 public class LogTest {
 
     public static void main(String[] args) {
-        SimpleDB.init("studentdb");
+        SimpleDB.init("liuzhian/simpledb");
 //        LogMgr logMgr = SimpleDB.logMgr();
 //        int lsn1 = logMgr.append(new Object[]{"a", "b"});
 //        int lsn2 = logMgr.append(new Object[]{"c", "d"});
@@ -32,12 +32,14 @@ public class LogTest {
 //            System.out.println("[" + v1 + ", " + v2 + "]");
 //        }
 
-        Iterator<LogRecord> iter= new LogRecordIterator();
-        while (iter.hasNext())
-        {
-            LogRecord record=iter.next();
-            System.out.println(record);
+        int logRecordNum = 0;
+        Iterator<LogRecord> iter = new LogRecordIterator();
+        while (iter.hasNext()) {
+            LogRecord record = iter.next();
+            logRecordNum++;
+
         }
+        System.out.println(logRecordNum);
 
     }
 }
