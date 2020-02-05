@@ -77,6 +77,8 @@ public class RecordFile {
      * @throws IOException
      */
     public void insert() throws IOException {
+        // 先移到第0块
+        moveTo(0);
         // 当始终找不到一个插入的位置时
         while (!recordPage.insert()) {
             // 如果现在是在最后一个块，那肯定是要追加一个新块了

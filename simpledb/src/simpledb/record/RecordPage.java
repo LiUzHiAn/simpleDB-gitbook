@@ -87,7 +87,7 @@ public class RecordPage {
         boolean found = searchFor(EMPTY);
         if (found) {
             int foundSlotStartPos = currentPos();
-            tx.setInt(blk, foundSlotStartPos, INUSE);
+            tx.setInt(blk, foundSlotStartPos, INUSE);  // 操作后游标会移动4个字节
             // 这里只是将标志位进行了设置，并没有填充插入的记录的具体值
         }
         return found;

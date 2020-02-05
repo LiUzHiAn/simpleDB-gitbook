@@ -36,7 +36,7 @@ public class RecordFileTest {
             }
         }
         System.out.println("删除的记录数：" + cnt);
-        // recordFile.close();
+        recordFile.close();
         tx.commit();
     }
 }
