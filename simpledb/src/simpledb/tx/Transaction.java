@@ -39,17 +39,17 @@ public class Transaction {
     }
 
     public void commit() {
-        myBuffers.unpinAll();
         recoveryMgr.commit();
-        concurMgr.release();
         System.out.println("transaction " + txNum + " committed");
+        myBuffers.unpinAll();
+        concurMgr.release();
     }
 
     public void rollback() {
-        myBuffers.unpinAll();
         recoveryMgr.rollback();
-        concurMgr.release();
         System.out.println("transaction " + txNum + " rolled back");
+        myBuffers.unpinAll();
+        concurMgr.release();
     }
 
     public void recover(){

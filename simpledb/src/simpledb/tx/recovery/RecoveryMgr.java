@@ -47,15 +47,17 @@ public class RecoveryMgr {
     }
 
     public void rollback() {
-        SimpleDB.bufferMgr().flushAll(txNum);
         doRollback();  // 把修改后的值，再改回来
+        SimpleDB.bufferMgr().flushAll(txNum);
+
         int lsn = new RollBackRecord(txNum).writeToLog();
         SimpleDB.logMgr().flush(lsn);
     }
 
     public void recover() {
-        SimpleDB.bufferMgr().flushAll(txNum);
         doRecover();  // 把修改后的值，再改回来
+        SimpleDB.bufferMgr().flushAll(txNum);
+
         int lsn = new CheckpointRecord().writeToLog();
         SimpleDB.logMgr().flush(lsn);
     }
