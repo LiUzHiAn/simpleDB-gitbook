@@ -5,6 +5,9 @@ import simpledb.file.Block;
 import simpledb.file.FileMgr;
 import simpledb.file.Page;
 import simpledb.log.LogMgr;
+import simpledb.metadata.MetadataMgr;
+import simpledb.metadata.TableMgr;
+import simpledb.metadata.ViewMgr;
 
 import java.io.IOException;
 
@@ -21,6 +24,7 @@ public class SimpleDB {
     private static FileMgr fm;
     private static LogMgr lm;
     private static BufferMgr bm;
+    private static MetadataMgr mm;
 
     /**
      * 初始化数据库系统
@@ -33,6 +37,8 @@ public class SimpleDB {
         initLogMgr("testLog.log");
         // 初始化缓冲管理器
         initBufferMgr(10);
+        // 初始化元数据管理器
+        ininMetadataMgr();
 
         boolean isNew = fm.isNew();
         if (isNew) {
@@ -60,7 +66,6 @@ public class SimpleDB {
             e.printStackTrace();
         }
     }
-
     /**
      * 初始化缓冲管理器
      * @param bufferNums
@@ -70,6 +75,14 @@ public class SimpleDB {
         bm=new BufferMgr(bufferNums);
     }
 
+    /**
+     * 初始化元数据管理器
+     */
+    private static void ininMetadataMgr()
+    {
+        mm=new MetadataMgr();
+    }
+
     public static FileMgr fileMgr() {
         return fm;
     }
@@ -77,4 +90,5 @@ public class SimpleDB {
         return lm;
     }
     public static BufferMgr bufferMgr(){return  bm;}
+    public static MetadataMgr metadataMgr(){return mm;}
 }
