@@ -1,7 +1,7 @@
 # 1. Overview
 This is a simple relational database(named simpleDB) implementation using Java. And this project is a playgorund-level database implementation in the book "Database Design And Implementation" written by Edward Sciore,Boston College.
 
-JUST for educational use, I will follow the author to implemente the simpleDB. I have commented my code in Chinese for  reading conveniently. But you are highly recommended to take a look about original textbook which is really understandable.
+JUST for educational use, I will follow the author to implemente the simpleDB. I have commented my code in Chinese for reading conveniently. But you are highly recommended to take a look about original textbook which is really understandable.
 
 这是一个简单的关系数据库（名为simpleDB）实现，Java语言实现，这是《Database Design And Implementation》作者Edward Sciore在书中提供的一个游乐场级别的数据库实现。 为了方便学习使用，我会跟随作者的脚步去实现这个数据库，并且尝试翻译我所学习的部分。为方便大家阅读代码，我已经将代码中的部分注释修改为中文，但仍然建议配合原书一起使用。
 
@@ -31,3 +31,13 @@ SimpleDB的整体架构如下图所示，下层组件为上层组件提供服务
 - 当前支持非跨块的记录(non spanned records)。
 - 给客户端提供记录文件粒度的记录增、删、查、改方法，隐藏了底层的块、页细节。
 
+### 3.5 元数据管理
+- SimpleDB实现了4类元数据：
+  1. 表的元数据，描述的是某张表的信息，例如该表每条记录的长度，每个字段的偏移量，类型。
+  2. 视图的元数据，描述的是每个视图的属性，例如视图的名称和定义。
+  3. 索引的元数据，描述的是每个索引的信息，包含索引名、被索引的表名、被索引的字段名。
+  4. 数据统计的元数据，描述的是每张表的占用块数，已经各字段的值分布情况。
+- 表的元数据存放在系统的catalog表tblcat和fldcat中，一张来存放表粒度的信息（例如记录长度），另一种表来存放表中各字段信息（例如字段名、字段长度、字段的类型）。表名和字段名最长字符限定为20。
+- 视图的元数据存放在系统的catalog表viewcat中，视图的定义最长字符数我们限定成了150。
+- 索引的元数据存放在系统的catalog表idxcay中，包含索引名、被索引的表名、被索引的字段名。
+- 数据统计信息没有用表来存，而是在系统每次启动的时候重新计算出，对于小型的数据库，这一统计计算时间不是很长，因此不会拖长整个系统的启动时间。

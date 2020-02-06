@@ -21,7 +21,7 @@ public class StatInfoTest {
         StatInfo statInfo=metadataMgr.getStatInfo("student",tableInfo,tx);
 
         System.out.println(statInfo.blocksAccessed() + " " +
-                statInfo.recordOutput() + " " +
+                statInfo.recordsOutput() + " " +
                 statInfo.distinctValues("majorid"));
         tx.commit();
 

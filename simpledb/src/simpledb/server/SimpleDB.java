@@ -38,7 +38,7 @@ public class SimpleDB {
         // 初始化缓冲管理器
         initBufferMgr(10);
         // 初始化元数据管理器
-        ininMetadataMgr();
+        initMetadataMgr();
 
         boolean isNew = fm.isNew();
         if (isNew) {
@@ -78,7 +78,7 @@ public class SimpleDB {
     /**
      * 初始化元数据管理器
      */
-    private static void ininMetadataMgr()
+    private static void initMetadataMgr()
     {
         mm=new MetadataMgr();
     }

@@ -20,7 +20,7 @@ public class StatInfo {
         return numblocks;
     }
 
-    public int recordOutput() {
+    public int recordsOutput() {
         return numRecords;
     }
 

@@ -22,9 +22,11 @@ public class StatMgr {
     public static final int REFRESH_EVERY_CALLS = 100;
     private Map<String, StatInfo> tableStats;
     private int numCalls;
+    private TableMgr tableMgr;
 
 
-    public StatMgr(Transaction tx) throws IOException {
+    public StatMgr(TableMgr tableMgr, Transaction tx) throws IOException {
+        this.tableMgr = tableMgr;
         // 新建对象时统计一次
         refreshStatistics(tx);
     }
@@ -56,7 +58,7 @@ public class StatMgr {
         tableStats = new HashMap<>();
         this.numCalls = 0;
         // 先获得tblcat表，获取各表的信息
-        TableInfo tblCatTableInfo = SimpleDB.metadataMgr().getTableInfo("tblcat", tx);
+        TableInfo tblCatTableInfo = tableMgr.getTableInfo("tblcat", tx);
         RecordFile tblCatRecordFile = new RecordFile(tblCatTableInfo, tx);
 
         // 更新每张表的数据统计信息
@@ -78,7 +80,7 @@ public class StatMgr {
      */
     private synchronized void refreshTableStats(String tblName, Transaction tx) throws IOException {
         int numRecords = 0;
-        TableInfo tableInfo = SimpleDB.metadataMgr().getTableInfo(tblName, tx);
+        TableInfo tableInfo = tableMgr.getTableInfo(tblName, tx);
         RecordFile recordFile = new RecordFile(tableInfo, tx);
 
         recordFile.beforeFirst();
