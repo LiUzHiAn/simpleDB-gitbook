@@ -8,6 +8,7 @@ import simpledb.log.LogMgr;
 import simpledb.metadata.MetadataMgr;
 import simpledb.metadata.TableMgr;
 import simpledb.metadata.ViewMgr;
+import simpledb.tx.Transaction;
 
 import java.io.IOException;
 
@@ -30,22 +31,25 @@ public class SimpleDB {
      * 初始化数据库系统
      * @param dirName 数据库保存的目录名
      */
-    public static void init(String dirName) {
+    public static void init(String dirName) throws IOException {
         // 初始化文件管理器
         initFileMgr(dirName);
         // 初始化日志管理器  TODO
         initLogMgr("testLog.log");
         // 初始化缓冲管理器
         initBufferMgr(10);
-        // 初始化元数据管理器
-        initMetadataMgr();
-
         boolean isNew = fm.isNew();
+
+        Transaction tx=new Transaction();
         if (isNew) {
             System.out.println("creating a new database");
         } else {
             System.out.println("recovering the existing database");
+            tx.recover();
         }
+        // 初始化元数据管理器
+        initMetadataMgr(isNew,tx);
+        tx.commit();
     }
 
     /**
@@ -78,9 +82,8 @@ public class SimpleDB {
     /**
      * 初始化元数据管理器
      */
-    private static void initMetadataMgr()
-    {
-        mm=new MetadataMgr();
+    private static void initMetadataMgr(boolean isNew,Transaction tx) throws IOException {
+        mm=new MetadataMgr(isNew,tx);
     }
 
     public static FileMgr fileMgr() {

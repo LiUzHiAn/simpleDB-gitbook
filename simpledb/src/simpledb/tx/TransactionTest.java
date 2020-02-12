@@ -7,6 +7,7 @@ import simpledb.file.Block;
 import simpledb.server.SimpleDB;
 
 import java.awt.print.PageFormat;
+import java.io.IOException;
 
 /**
  * @ClassName TransactionTest
@@ -18,7 +19,7 @@ import java.awt.print.PageFormat;
 
 public class TransactionTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         SimpleDB.init("studentdb");
         TestA tA = new TestA();new Thread(tA).start();
         TestB tB = new TestB();new Thread(tB).start();
