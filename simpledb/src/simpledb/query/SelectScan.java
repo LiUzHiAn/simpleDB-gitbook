@@ -24,7 +24,7 @@ public class SelectScan implements UpdateScan {
     //================Scan 接口中的方法实现===================
 
     @Override
-    public void beforeFirst() {
+    public void beforeFirst() throws IOException {
         scan.beforeFirst();
     }
 
@@ -38,7 +38,7 @@ public class SelectScan implements UpdateScan {
     }
 
     @Override
-    public void close() {
+    public void close() throws IOException {
         scan.close();
     }
 
