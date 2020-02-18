@@ -23,7 +23,7 @@ public class SelectPlan implements Plan {
     @Override
     public Scan open() throws IOException {
         Scan scan = plan.open();
-        return  new SelectScan(scan,predicate);
+        return new SelectScan(scan, predicate);
     }
 
     @Override
@@ -41,8 +41,15 @@ public class SelectPlan implements Plan {
     public int distinctValues(String fldName) {
         if (null != predicate.equatesWithConstant(fldName))
             return 1;
-        else
-            return Math.min(recordsOutput(), plan.distinctValues(fldName));
+        else {
+            String theOtherFldName = predicate.equatesWithField(fldName);
+            if (theOtherFldName != null)
+                return Math.min(plan.distinctValues(fldName),
+                        plan.distinctValues(theOtherFldName));
+            else
+                return Math.min(recordsOutput(), plan.distinctValues(fldName));
+        }
+
     }
 
     @Override
