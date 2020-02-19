@@ -6,6 +6,8 @@ import simpledb.record.TableInfo;
 import simpledb.server.SimpleDB;
 import simpledb.tx.Transaction;
 
+import java.io.IOException;
+
 import static simpledb.file.Page.BLOCK_SIZE;
 
 /**
@@ -30,12 +32,12 @@ public class IndexInfo {
      * @param fieldName 被索引的字段名，当前只支持单字段索引
      * @param tx
      */
-    public IndexInfo(String idxName, String tblName, String fieldName, Transaction tx) {
+    public IndexInfo(String idxName, String tblName, String fieldName, Transaction tx) throws IOException {
         this.idxName = idxName;
         this.fieldName = fieldName;
         this.tx = tx;
         tableInfo = SimpleDB.metadataMgr().getTableInfo(tblName, tx);
-        statInfo = SimpleDB.metadataMgr().getStatInfo(tblName, tableInfo, tx);
+        statInfo = SimpleDB.metadataMgr().getStatInfo(tblName, tx);
     }
 
     /**
@@ -46,16 +48,16 @@ public class IndexInfo {
      *
      * @return
      */
-    public int blocksAccessed() {
-        // 被索引的记录，每条的长度
-        int recordLen = tableInfo.recordLength();
-        // 一个块可以存储多少条索引
-        int recordNumPerBlock = BLOCK_SIZE / recordLen;
-        // 总块数
-        int numBlocks = statInfo.recordsOutput() / recordNumPerBlock;
-
-        return BTreeIndex.searchCost(numBlocks, recordNumPerBlock);
-    }
+//    public int blocksAccessed() {
+//        // 被索引的记录，每条的长度
+//        int recordLen = tableInfo.recordLength();
+//        // 一个块可以存储多少条索引
+//        int recordNumPerBlock = BLOCK_SIZE / recordLen;
+//        // 总块数
+//        int numBlocks = statInfo.recordsOutput() / recordNumPerBlock;
+//
+//        return BTreeIndex.searchCost(numBlocks, recordNumPerBlock);
+//    }
 
     public int recordsOutput() {
         return statInfo.recordsOutput()
@@ -69,10 +71,10 @@ public class IndexInfo {
             return Math.min(statInfo.distinctValues(fieldName), recordsOutput());
     }
 
-    public Index open() {
-        Schema sch = schema();
-        return new BTreeIndex(idxName, sch, tx);
-    }
+//    public Index open() {
+//        Schema sch = schema();
+//        return new BTreeIndex(idxName, sch, tx);
+//    }
 
     /**
      * 构造索引的schema，如下：

@@ -4,6 +4,7 @@ import simpledb.server.SimpleDB;
 import simpledb.tx.recovery.LogRecord;
 import simpledb.tx.recovery.LogRecordIterator;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Iterator;
 
 public class LogTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         SimpleDB.init("liuzhian/simpledb");
 //        LogMgr logMgr = SimpleDB.logMgr();
 //        int lsn1 = logMgr.append(new Object[]{"a", "b"});

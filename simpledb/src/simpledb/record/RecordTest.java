@@ -4,6 +4,8 @@ import simpledb.file.Block;
 import simpledb.server.SimpleDB;
 import simpledb.tx.Transaction;
 
+import java.io.IOException;
+
 /**
  * @ClassName RecordTest
  * @Description TODO
@@ -12,7 +14,7 @@ import simpledb.tx.Transaction;
  * @Version 1.0
  */
 public class RecordTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Schema sch = new Schema();
         sch.addIntField("cid");

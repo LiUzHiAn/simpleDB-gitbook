@@ -4,6 +4,8 @@ import simpledb.file.Block;
 import simpledb.log.LogMgr;
 import simpledb.server.SimpleDB;
 
+import java.io.IOException;
+
 /**
  * @ClassName BufferTest
  * @Deacription // TODO
@@ -14,7 +16,7 @@ import simpledb.server.SimpleDB;
 
 public class BufferTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        // Case 1
 //        SimpleDB.init("studentdb");
 //        BufferMgr bufferMgr = SimpleDB.bufferMgr();

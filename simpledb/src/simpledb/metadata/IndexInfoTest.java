@@ -22,13 +22,13 @@ public class IndexInfoTest {
         Map<String,IndexInfo> indexes = metadataMgr.getIndexInfo("student", tx);
 
         // Part 1: Print the name and cost of each index on STUDENT
-        for (String fieldName : indexes.keySet()) {
-            IndexInfo indexInfo = indexes.get(fieldName);
-            System.out.println(fieldName + "\t" + indexInfo.blocksAccessed());
-        }
-
-        // Part 2: Open the index on MajorId
-        IndexInfo ii = indexes.get("majorid");
-        Index idx = ii.open();
+//        for (String fieldName : indexes.keySet()) {
+//            IndexInfo indexInfo = indexes.get(fieldName);
+//            System.out.println(fieldName + "\t" + indexInfo.blocksAccessed());
+//        }
+//
+//        // Part 2: Open the index on MajorId
+//        IndexInfo ii = indexes.get("majorid");
+//        Index idx = ii.open();
     }
 }
