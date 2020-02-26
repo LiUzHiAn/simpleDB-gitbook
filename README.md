@@ -1,9 +1,9 @@
 ## 1. Overview
-This is a simple relational database(named simpleDB) implementation using Java. And this project is a playgorund-level database implementation in the book "Database Design And Implementation" written by Edward Sciore,Boston College.
+This is a simple relational database(named SimpleDB) implementation in Java. And this project is a playgorund-level database implementation described in the book "Database Design And Implementation" written by Edward Sciore, Boston College.
 
-JUST for educational use, I will follow the author to implemente the simpleDB. I have commented my code in Chinese for reading conveniently. But you are highly recommended to take a look about original textbook which is really understandable.
+Just for educational use, I will follow the author to reimplemente the SimpleDB. I have commented some code in Chinese for convenient reading and trasnlated mainly chapters of part 3 in Chinese. You are also highly recommended to take a look about the original textbook which is really easy to understand.
 
-这是一个简单的关系数据库（名为simpleDB）实现，Java语言实现，这是《Database Design And Implementation》作者Edward Sciore在书中提供的一个游乐场级别的数据库实现。 为了方便学习使用，我会跟随作者的脚步去实现这个数据库，并且尝试翻译我所学习的部分。为方便大家阅读代码，我已经将代码中的部分关键注释修改为中文，但仍然建议配合原书一起使用。
+这是一个简单的关系数据库（名为simpleDB）实现，Java语言实现，这是《Database Design And Implementation》作者Edward Sciore在书中提供的一个游乐场级别的数据库实现。 为了方便学习使用，我会跟随作者的脚步去再次实现这个数据库。为方便大家阅读代码，我已经将部分关键代码添加了中文注释，并且尝试翻译了原书第3部分中的绝大部分章节，但仍然建议配合原书一起使用，因为相较于中文，英文没有那么地晦涩并且歧义更少，理解起来更简单。
 
 ## 2. 架构
 
@@ -54,6 +54,11 @@ SimpleDB的整体架构如下图所示，下层组件为上层组件提供服务
     3. 创建表、视图、索引
     4. 只支持where谓词，不支持group by等    
 - 采用递归下降解析法(recursive descent)解析SQL语句。
+
+### 3.8 SQL Planning
+- 目前实现了最简单的planning算法（包括query planning算法和update planning算法），没有作SQL语义验证和plan代价分析。
+- 设计了好了Planner的接口，增强代码的plug-and-play capability。
+
 ___
 
 ### Q&A
@@ -76,7 +81,7 @@ ___
 
 email：liuzhian@whut.edu.cn
 
-最后更新时间：2020/02/19
+最后更新时间：2020/02/26
 
 ___
 ### 打赏

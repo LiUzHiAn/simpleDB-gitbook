@@ -13,7 +13,7 @@
     * [第15章——记录管理](part3/ch15.md)
     * [第16章——元数据管理](part3/ch16.md)
     * [第17章——查询处理](part3/ch17.md)
-    * [第18章](part3/ch18.md)
-    * [第19章](part3/ch19.md)
-    * [第20章](part3/ch20.md)
+    * [第18章——SQL语句解析](part3/ch18.md)
+    * [第19章——SQL Planning](part3/ch19.md)
+    * [第20章——数据库服务](part3/ch20.md)
 
