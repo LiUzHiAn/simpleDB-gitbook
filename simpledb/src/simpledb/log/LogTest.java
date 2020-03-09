@@ -18,7 +18,7 @@ import java.util.Iterator;
 public class LogTest {
 
     public static void main(String[] args) throws IOException {
-        SimpleDB.init("liuzhian/simpledb");
+        SimpleDB.init("studentdb");
 //        LogMgr logMgr = SimpleDB.logMgr();
 //        int lsn1 = logMgr.append(new Object[]{"a", "b"});
 //        int lsn2 = logMgr.append(new Object[]{"c", "d"});
@@ -38,6 +38,7 @@ public class LogTest {
         while (iter.hasNext()) {
             LogRecord record = iter.next();
             logRecordNum++;
+            System.out.println(record);
 
         }
         System.out.println(logRecordNum);

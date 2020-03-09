@@ -92,7 +92,7 @@ public class Lexer {
     }
 
     public String eatStringConstant() {
-        if (!matchIntConstant())
+        if (!matchStringConstant())
             throw new BadSyntaxException();
         String str = tokenizer.sval;
         nextToken();

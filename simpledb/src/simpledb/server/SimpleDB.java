@@ -49,6 +49,7 @@ public class SimpleDB {
             System.out.println("recovering the existing database");
             tx.recover();
         }
+
         // 初始化元数据管理器
         initMetadataMgr(isNew, tx);
         tx.commit();
