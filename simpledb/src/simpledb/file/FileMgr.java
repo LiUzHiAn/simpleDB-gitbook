@@ -43,6 +43,13 @@ public class FileMgr {
         return isNew;
     }
 
+    /**
+     * 返回当前文件的逻辑块数目
+     *
+     * @param fileName 文件名
+     * @return 逻辑块数
+     * @throws IOException
+     */
     public int size(String fileName) throws IOException {
         FileChannel fc = getFile(fileName);
         int sz = (int) fc.size() / Page.BLOCK_SIZE;
@@ -84,6 +91,13 @@ public class FileMgr {
         }
     }
 
+    /**
+     * 追加一个新块到文件尾部，并将缓冲区的内容写入
+     *
+     * @param filename 待追加的文件名
+     * @param buffer   缓冲区，其中保存了要追加的内容
+     * @return 新建的块
+     */
     synchronized Block append(String filename, ByteBuffer buffer) {
         try {
             int newBlkNum = size(filename);

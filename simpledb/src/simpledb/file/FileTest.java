@@ -15,7 +15,7 @@ public class FileTest {
 
     public static void main(String[] args) {
         try {
-            SimpleDB.init("liuzhian/studentdb");
+            SimpleDB.init("lzadb");
 
             // 第0块
             Block blk = new Block("junk", 0);
@@ -37,6 +37,7 @@ public class FileTest {
             Page p3 = new Page();
             p3.setString(20, "hola");
             blk = p3.append("junk");
+            assert (blk.number() == 1);
 
             // 再次重新读回追加的block到内存
             Page p4 = new Page();

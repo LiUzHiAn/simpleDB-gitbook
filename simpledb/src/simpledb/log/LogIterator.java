@@ -20,11 +20,12 @@ public class LogIterator implements Iterator<BasicLogRecord> {
 
     private Block blk;
     private Page page = new Page();
-    private int currentRec;
+    private int currentRec;  // 迭代器当前遍历的日志记录结束位置
 
     public LogIterator(Block blk) {
         this.blk = blk;
         page.read(blk);
+        // 初始化为最后一条日志记录的结束位置
         currentRec = page.getInt(LAST_POS);
     }
 

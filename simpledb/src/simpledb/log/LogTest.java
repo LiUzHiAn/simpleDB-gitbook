@@ -18,12 +18,12 @@ import java.util.Iterator;
 public class LogTest {
 
     public static void main(String[] args) throws IOException {
-        SimpleDB.init("studentdb");
-//        LogMgr logMgr = SimpleDB.logMgr();
-//        int lsn1 = logMgr.append(new Object[]{"a", "b"});
-//        int lsn2 = logMgr.append(new Object[]{"c", "d"});
-//        int lsn3 = logMgr.append(new Object[]{"e", "f"});
-//        logMgr.flush(lsn3);
+        SimpleDB.init("lzadb");
+        LogMgr logMgr = SimpleDB.logMgr();
+        int lsn1 = logMgr.append(new Object[]{"a", "b"});
+        int lsn2 = logMgr.append(new Object[]{"c", "d"});
+        int lsn3 = logMgr.append(new Object[]{"e", "f"});
+        logMgr.flush(lsn3);
 
 //        Iterator<BasicLogRecord> iter = logMgr.iterator();
 //        while (iter.hasNext()) {

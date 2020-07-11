@@ -31,6 +31,9 @@ public class Page {
     public Page() {
     }
 
+    /**
+     * 文件粒度的并发锁
+     */
     public synchronized int getInt(int offset) {
         contents.position(offset);
         return contents.getInt();
@@ -43,8 +46,8 @@ public class Page {
 
     public synchronized String getString(int offset) {
         contents.position(offset);
-        int len = contents.getInt();  // 获取字符串的长度
-        byte[] byteVal = new byte[len];
+        int len = contents.getInt();  // 先获取字符串的长度
+        byte[] byteVal = new byte[len];  // 再获取字符串中的后续字符
         contents.get(byteVal);
         return new String(byteVal);
     }

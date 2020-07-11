@@ -26,7 +26,7 @@ public class LogMgr {
     // 日志页
     private Page mypage = new Page();
     private Block currentBlk;
-    private int currentPos;
+    private int currentPos;  // 下一次写数据到日志页中的起始位置
 
     public LogMgr(String logfile) throws IOException {
         this.logfile = logfile;
@@ -39,7 +39,10 @@ public class LogMgr {
             // 注意，块号的下标从0开始，所以要减去1
             currentBlk = new Block(logfile, logSize - 1);
             mypage.read(currentBlk);
-            currentPos = getLastRecordPosition();
+            // TODO: currentPos = getLastRecordPosition() + INT_SIZE?
+            // Refer to figure 13.7 (b)(c)(d)情况
+            // TODO:
+            currentPos = getLastRecordPosition() + INT_SIZE;
         }
 
     }
@@ -86,7 +89,7 @@ public class LogMgr {
      * 处理追加完日志记录后的动作。
      * <p>
      * 也就是:
-     * 1. 先在当前日志记录后面加上一个整数，用来标识上一条日志记录的起始位置。
+     * 1. 先在当前日志记录后面加上一个整数，用来标识上一条日志记录的结束位置。
      * 2. 再改变日志页的最开始的4个字节，用来直接标识最后一条日志记录的结束位置。
      * <p>
      * 这一部分类似一个逆着的数组链表，务必理清其中的逻辑
@@ -142,11 +145,11 @@ public class LogMgr {
      * 追加一个新的空块到日志文件
      */
     private void appendNewBlock() {
-        // 设置上一条日志记录的开始位置为0
+        // 设置最后一条日志记录的结束位置为0
         setLastRecordPosition(0);
         currentBlk = mypage.append(logfile);
         // 新分配的日志块肯定只有一个INT，也就是4个字节
-        // 该INT表示的是上一条日志记录的起始位置，在这里为0
+        // 该INT表示的是最后一条日志记录的结束位置，其值为0
         currentPos = INT_SIZE;
     }
 

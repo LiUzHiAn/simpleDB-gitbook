@@ -38,21 +38,21 @@ public class SimpleDB {
         initFileMgr(dirName);
         // 初始化日志管理器  TODO
         initLogMgr("testLog.log");
-        // 初始化缓冲管理器
-        initBufferMgr(10);
-        boolean isNew = fm.isNew();
-
-        Transaction tx = new Transaction();
-        if (isNew) {
-            System.out.println("creating a new database");
-        } else {
-            System.out.println("recovering the existing database");
-            tx.recover();
-        }
-
-        // 初始化元数据管理器
-        initMetadataMgr(isNew, tx);
-        tx.commit();
+//        // 初始化缓冲管理器
+//        initBufferMgr(10);
+//        boolean isNew = fm.isNew();
+//
+//        Transaction tx = new Transaction();
+//        if (isNew) {
+//            System.out.println("creating a new database");
+//        } else {
+//            System.out.println("recovering the existing database");
+//            tx.recover();
+//        }
+//
+//        // 初始化元数据管理器
+//        initMetadataMgr(isNew, tx);
+//        tx.commit();
     }
 
     /**

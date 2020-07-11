@@ -21,7 +21,7 @@ public class BasicLogRecord {
 
     public BasicLogRecord(Page logPage, int pos) {
         this.logPage = logPage;
-        this.pos = pos;
+        this.pos = pos;  // 日志记录起始的位置
     }
 
     public int nextInt() {
