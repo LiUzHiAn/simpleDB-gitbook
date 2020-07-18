@@ -12,8 +12,8 @@ import simpledb.file.Block;
 
 public class BasicBufferMgr {
 
-    private Buffer[] bufferPool;
-    private int numAvailable;
+    private Buffer[] bufferPool;  // 缓冲池
+    private int numAvailable;   // 空闲缓冲区数量
 
     public BasicBufferMgr(int numBuffers) {
         this.numAvailable = numBuffers;
@@ -41,6 +41,7 @@ public class BasicBufferMgr {
         Buffer buff = findExistingBuffer(blk);
         // 1. 如果没有缓冲区的内容就是待关联的块,则找一个没被固定的缓冲区
         if (null == buff) {
+            // TODO 怎么选取一个空闲的缓冲区可以用不同的策略
             buff = chooseUnpinnedBuffer();
             // 1.1 如果不存在没被固定的缓冲区，则返回null
             if (null == buff)
@@ -48,11 +49,13 @@ public class BasicBufferMgr {
             // 1.2 找到了一个没被固定的块，则将块的值赋上
             buff.assignToBlock(blk);
         }
-        // 2. 如果存在一个缓冲区的内容就是待关联的块
-        // 2.1 如果该缓冲区没被固定,则需要先固定一下，其实就是减少一下
+        // 2. 如果存在一个缓冲区的内容就是待关联的块，此时有2种情况：
+        // 2.1 该缓冲区已经被固定，即 pins > 0,有可能是当前客户端之前固定过该块，或者是其他客户端固定过该块，
+        //      在这里，我们并不关心是被缓冲区是被哪个客户端pin的。
+        // 2.2 如果该缓冲区没被固定,即该缓冲区上的block是新替换的，即 pins == 0
         if (!buff.isPinned())
             numAvailable--;
-        // 2.1 固定的次数自增1  && 2.2 如果已经固定了，则固定的次数自增1
+        // pins++
         buff.pin();
 
         return buff;
@@ -117,6 +120,8 @@ public class BasicBufferMgr {
 
     /**
      * 在缓冲池中找一个没被固定的页
+     * <p>
+     * TODO: 当前用的最简单的Naive算法，找到一个就OK,后期考虑其他策略。
      *
      * @return 如果存在，就返回那个缓冲区；否则返回null
      */

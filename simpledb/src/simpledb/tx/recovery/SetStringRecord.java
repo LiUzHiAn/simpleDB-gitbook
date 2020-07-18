@@ -1,6 +1,5 @@
 package simpledb.tx.recovery;
 
-import com.sun.org.apache.regexp.internal.RE;
 import simpledb.buffer.Buffer;
 import simpledb.buffer.BufferMgr;
 import simpledb.file.Block;

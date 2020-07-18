@@ -25,23 +25,23 @@ public class LogTest {
         int lsn3 = logMgr.append(new Object[]{"e", "f"});
         logMgr.flush(lsn3);
 
-//        Iterator<BasicLogRecord> iter = logMgr.iterator();
-//        while (iter.hasNext()) {
-//            BasicLogRecord rec = iter.next();
-//            String v1 = rec.nextString();
-//            String v2 = rec.nextString();
-//            System.out.println("[" + v1 + ", " + v2 + "]");
-//        }
-
-        int logRecordNum = 0;
-        Iterator<LogRecord> iter = new LogRecordIterator();
+        Iterator<BasicLogRecord> iter = logMgr.iterator();
         while (iter.hasNext()) {
-            LogRecord record = iter.next();
-            logRecordNum++;
-            System.out.println(record);
-
+            BasicLogRecord rec = iter.next();
+            String v1 = rec.nextString();
+            String v2 = rec.nextString();
+            System.out.println("[" + v1 + ", " + v2 + "]");
         }
-        System.out.println(logRecordNum);
+
+//        int logRecordNum = 0;
+//        Iterator<LogRecord> iter = new LogRecordIterator();
+//        while (iter.hasNext()) {
+//            LogRecord record = iter.next();
+//            logRecordNum++;
+//            System.out.println(record);
+//
+//        }
+//        System.out.println(logRecordNum);
 
     }
 }

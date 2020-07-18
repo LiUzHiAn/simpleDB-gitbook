@@ -16,11 +16,11 @@ import simpledb.server.SimpleDB;
 public class Buffer {
     private Page contents = new Page();
     private Block blk = null;
-    // 当前缓冲页固定的次数，有点多线程中ReentranLock的味道
+    // 当前缓冲页固定的次数，有点多线程中ReentranLock的意思，一个客户端可以pin多次
     private int pins = 0;
     // 和事务相关 TODO
-    private int modifiedBy = -1;
-    private int logSequenceNum = -1;
+    private int modifiedBy = -1;  // 当前缓冲区对应哪个事务
+    private int logSequenceNum = -1;  // LSN
 
     public int getInt(int offset) {
         return contents.getInt(offset);
@@ -85,10 +85,10 @@ public class Buffer {
     }
 
     /**
-     * 将缓冲页中的内容写回磁盘。
+     * 将指定的块中内容，赋值到缓冲页上。
      * <p>
-     * 注意，在写回磁盘前，要检查下当前页的内容是否被修改过！
-     * 如果被修改过，必须先在写回磁盘前写一条日志记录，然后再执行磁盘写操作。
+     * 注意，在赋值前，要检查下当前页的内容是否被修改过！
+     * 如果被修改过，必须先在写回磁盘前写一条日志记录，然后再执行相关操作。
      * <p>
      * 有点类似Buffer类的构造函数。
      *

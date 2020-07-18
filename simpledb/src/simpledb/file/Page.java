@@ -32,7 +32,7 @@ public class Page {
     }
 
     /**
-     * 文件粒度的并发锁
+     * 页粒度的并发锁
      */
     public synchronized int getInt(int offset) {
         contents.position(offset);

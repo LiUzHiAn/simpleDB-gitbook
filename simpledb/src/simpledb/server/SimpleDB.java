@@ -38,8 +38,8 @@ public class SimpleDB {
         initFileMgr(dirName);
         // 初始化日志管理器  TODO
         initLogMgr("testLog.log");
-//        // 初始化缓冲管理器
-//        initBufferMgr(10);
+        // 初始化缓冲管理器
+        initBufferMgr(10);
 //        boolean isNew = fm.isNew();
 //
 //        Transaction tx = new Transaction();

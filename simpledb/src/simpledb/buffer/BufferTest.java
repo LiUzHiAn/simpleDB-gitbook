@@ -17,16 +17,16 @@ import java.io.IOException;
 public class BufferTest {
 
     public static void main(String[] args) throws IOException {
-//        // Case 1
-//        SimpleDB.init("studentdb");
-//        BufferMgr bufferMgr = SimpleDB.bufferMgr();
-//        Block blk = new Block("junk", 3);
-//        Buffer buffer = bufferMgr.pin(blk);
-//        int n = buffer.getInt(392);
-//        String str = buffer.getString(20);
-//        // 客户端代码需要对unpin负责
-//        bufferMgr.unpin(buffer);
-//        System.out.println("Values are: " + n + ", " + str);
+        // Case 1
+        SimpleDB.init("lzadb");
+        BufferMgr bufferMgr = SimpleDB.bufferMgr();
+        Block blk = new Block("junk", 3);
+        Buffer buffer = bufferMgr.pin(blk);
+        int n = buffer.getInt(392);
+        String str = buffer.getString(20);
+        // 客户端代码需要对unpin负责
+        bufferMgr.unpin(buffer);
+        System.out.println("Values are: " + n + ", " + str);
 
 
 //        // Case 2
@@ -46,16 +46,16 @@ public class BufferTest {
 //        bufferMgr.unpin(buffer);
 
         // Case 3
-        SimpleDB.init("studentdb");
-        BufferMgr bufferMgr = SimpleDB.bufferMgr();
-        PageFormatter pf=new ABCStringFormatter();
-        Buffer buffer = bufferMgr.pinNew("junk",pf);
-
-        String str=buffer.getString(0);
-        assert (str.equals("abc"));
-
-        int blkNum=buffer.block().number();
-        System.out.println("Appended block number: "+blkNum);
+//        SimpleDB.init("lzadb");
+//        BufferMgr bufferMgr = SimpleDB.bufferMgr();
+//        PageFormatter pf=new ABCStringFormatter();
+//        Buffer buffer = bufferMgr.pinNew("junk",pf);
+//
+//        String str=buffer.getString(0);
+//        assert (str.equals("abc"));
+//
+//        int blkNum=buffer.block().number();
+//        System.out.println("Appended block number: "+blkNum);
 
 
     }
