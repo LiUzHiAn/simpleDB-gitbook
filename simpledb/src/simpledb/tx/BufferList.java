@@ -22,7 +22,7 @@ import java.util.Map;
 public class BufferList {
 
     private Map<Block, Buffer> buffers = new HashMap<>();
-    // 已经的所有块
+    // 已经固定的所有块，如果固定多次，则列表中有多个值
     private List<Block> pins = new ArrayList<>();
     private BufferMgr bufferMgr = SimpleDB.bufferMgr();
 

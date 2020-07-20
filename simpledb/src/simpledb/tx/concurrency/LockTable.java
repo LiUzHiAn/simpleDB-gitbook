@@ -32,11 +32,13 @@ public class LockTable {
                 // 等待的目标是该块的互斥锁被释放
                 wait(MAX_TIME);
 
-            // 死锁发生了
+            // 死锁或其他原因导致 等待超时
             if (hasXLock(blk))
                 throw new LockAbortException();
-
-            int val = getLockVal(blk);  // 这个val肯定是个非负的值
+            // 这个val肯定是个非负的值
+            // 1. 如果这个块之前没有访问过，即lockVal=0
+            // 2. 如果这个块的共享锁已经被持有，则lockVal > 0
+            int val = getLockVal(blk);
             locks.put(blk, val + 1);
         } catch (InterruptedException e) {
             throw new LockAbortException();
@@ -46,7 +48,7 @@ public class LockTable {
     /**
      * 请求持有指定块的 互斥锁
      * <p>
-     * 我们假定事务已经获取了指定块的 共享锁。（即locks对应 blk的entry值至少为1）
+     * 我们假定事务已经获取互斥锁前，都会获得该块的 共享锁。（即locks对应 blk的entry值至少为1）
      *
      * @param blk 指定的块
      */
@@ -59,7 +61,7 @@ public class LockTable {
                 // 等待的目标是该块的共享锁被释放
                 wait(MAX_TIME);
 
-            // 死锁
+            // 死锁或其他原因导致等待超时
             if (hasOtherSLocks(blk))
                 throw new LockAbortException();
 
@@ -72,9 +74,9 @@ public class LockTable {
 
     public synchronized void unLock(Block blk) {
         int val = getLockVal(blk);
-        if (val > 1)
+        if (val > 1)  // 多于一个客户端持有块的共享锁
             locks.put(blk, val - 1);
-        else {
+        else { // 某客户端拥有该块的共享锁 或 互斥锁
             locks.remove(blk);
             // 该块变得空闲，通知所有等待线程竞争
             notifyAll();

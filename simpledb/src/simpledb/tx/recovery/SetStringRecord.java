@@ -85,7 +85,7 @@ public class SetStringRecord implements LogRecord {
     public void undo() {
         BufferMgr bufferMgr = SimpleDB.bufferMgr();
         Buffer buff = bufferMgr.pin(blk);
-        buff.setString(offset, oldVal, myTxNum, -1);
+        buff.setString(offset, oldVal, myTxNum, -1);  // undo操作不需要对应的日志记录
         bufferMgr.unpin(buff);
     }
 

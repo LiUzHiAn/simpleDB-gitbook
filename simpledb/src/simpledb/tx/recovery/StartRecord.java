@@ -36,7 +36,7 @@ public class StartRecord implements LogRecord {
     /**
      * 将一条日志记录写到日志文件，返回对应的LSN
      *
-     * @return
+     * @return 日志记录的 LSN
      */
     @Override
     public int writeToLog() {

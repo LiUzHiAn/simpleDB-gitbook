@@ -25,13 +25,10 @@ public class Transaction {
     private int txNum;
     private BufferList myBuffers = new BufferList();
 
-
-
     public Transaction() {
         txNum = nextTxNumber();
         recoveryMgr = new RecoveryMgr(txNum);
         concurMgr = new ConcurrencyMgr();
-
     }
 
     public int getTxNum() {
@@ -52,7 +49,7 @@ public class Transaction {
         concurMgr.release();
     }
 
-    public void recover(){
+    public void recover() {
         SimpleDB.bufferMgr().flushAll(txNum);
         recoveryMgr.recover();
     }
@@ -67,6 +64,7 @@ public class Transaction {
 
     public int getInt(Block blk, int offset) {
         concurMgr.sLock(blk);
+        // 客户端自己负责在调用getInt()方法前固定指定块
         Buffer buff = myBuffers.getBuffer(blk);
         return buff.getInt(offset);
     }
@@ -97,7 +95,7 @@ public class Transaction {
      * 获取文件的大小，即块的数量
      *
      * @param fileName 指定文件名
-     * @return 快数
+     * @return 块数
      * @throws IOException
      */
     public int size(String fileName) throws IOException {

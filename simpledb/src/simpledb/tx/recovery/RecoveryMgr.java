@@ -34,9 +34,9 @@ public class RecoveryMgr {
      * 写入一条提交日志记录,并将日志记录flush到日志文件
      * <p>
      * 注意，在SimpleDB中，采用的是undo-only恢复算法，
-     * 因此在提交日志记录被写入前，必须将，当前事务对应的，并且是修改过的缓冲区，
-     * flush到磁盘上。
+     * 因此在提交日志记录被写入前，必须将，当前事务对应的，并且是修改过的缓冲区，flush到磁盘上。
      * <p>
+     * 在将缓冲区内容flush到磁盘上之前，其实还采用了write-ahead logging 技术
      * 详情参阅第14章中的算法14-7
      */
     public void commit() {
@@ -48,6 +48,8 @@ public class RecoveryMgr {
 
     public void rollback() {
         doRollback();  // 把修改后的值，再改回来
+        // 为什么rollback之后还要flushAll呢？
+        // 这是因为，更新日志记录在undo过程中也会修改相应的缓冲区，因此需要flush到磁盘
         SimpleDB.bufferMgr().flushAll(txNum);
 
         int lsn = new RollBackRecord(txNum).writeToLog();
@@ -73,7 +75,7 @@ public class RecoveryMgr {
      * @return
      */
     public int setInt(Buffer buffer, int offset, int newVal) {
-        int oldVal = buffer.getInt(offset);
+        int oldVal = buffer.getInt(offset);  // 先把修改前的值记录下来，以供更新日志记录使用
         Block blk = buffer.block();
 
         if (isTemporaryBlock(blk))
@@ -144,16 +146,11 @@ public class RecoveryMgr {
             LogRecord rec = iter.next();
             if (rec.op() == LogRecord.CHECKPOINT)
                 return;
-            // TODO: 这个地方和作者提供的原始代码不太一样
-            // TODO: 译者认为，已经提交的事务应该包括已经commit和rollback的事务，这样更好理解
-            // TODO: 当然，按照作者提供的原始代码在执行效果上和当前是等价的
-            // TODO: 因为，rollback日志记录的undo()方法为空！
             if (rec.op() == LogRecord.COMMIT || rec.op()==LogRecord.ROLLBACK)
                 committedTxs.add(rec.txNumber());
             else if (!committedTxs.contains(rec.txNumber()))
                 // 其实只有SetIntRecord和SetStringRecord
-                // 的undo()方法才有具体的实现，其他日志记录类
-                // 的undo()方法都是空方法。
+                // 的undo()方法才有具体的实现，其他日志记录类的undo()方法都是空方法。
                 rec.undo();
         }
     }

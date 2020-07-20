@@ -20,7 +20,7 @@ import java.io.IOException;
 public class TransactionTest {
 
     public static void main(String[] args) throws IOException {
-        SimpleDB.init("studentdb");
+        SimpleDB.init("lzadb");
         TestA tA = new TestA();new Thread(tA).start();
         TestB tB = new TestB();new Thread(tB).start();
         TestC tC = new TestC();new Thread(tC).start();
