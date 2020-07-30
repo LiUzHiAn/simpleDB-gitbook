@@ -28,7 +28,7 @@ public class Schema {
     }
 
     public void addIntField(String fldName) {
-        // int类型的长度设置为0，这里指的是逻辑长度,没什么实际意义
+        // int类型的长度设置为0，这里指的是逻辑长度,没什么实际意义，可以设置为任意值
         // 而不是实际物理存储所需字节长度
         addField(fldName, INTEGER, 0);
     }
@@ -76,7 +76,7 @@ public class Schema {
 
     private class FieldInfo {
         int type;
-        int length;
+        int length;  // 对于string类型的字段，length记录的是可能最长的字符数
 
         public FieldInfo(int type, int length) {
             this.type = type;

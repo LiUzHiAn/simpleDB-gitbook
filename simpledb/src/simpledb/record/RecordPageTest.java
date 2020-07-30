@@ -13,7 +13,7 @@ import java.io.IOException;
  * @Date 2020/2/3 3:06 下午
  * @Version 1.0
  */
-public class RecordTest {
+public class RecordPageTest {
     public static void main(String[] args) throws IOException {
 
         Schema sch = new Schema();
@@ -22,7 +22,7 @@ public class RecordTest {
         sch.addIntField("deptid");
         TableInfo ti = new TableInfo("course", sch);
 
-        SimpleDB.init("liuzhian/studentdb");
+        SimpleDB.init("lzadb");
         Transaction tx = new Transaction();
         Block blk = new Block(ti.fileName(), 3);
         RecordPage rp = new RecordPage(blk, ti, tx);

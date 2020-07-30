@@ -14,17 +14,18 @@ import java.io.IOException;
  */
 public class RecordFileTest {
     public static void main(String[] args) throws IOException {
-        SimpleDB.init("liuzhian/simpledb");
+        SimpleDB.init("lza");
         Transaction tx = new Transaction();
         Schema schema = new Schema();
         schema.addIntField("A");
         TableInfo tableInfo = new TableInfo("junk", schema);
 
         RecordFile recordFile = new RecordFile(tableInfo, tx);
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 100; i++) {
             recordFile.insert();
             int n = (int) Math.round(Math.random() * 200);
             recordFile.setInt("A", n);
+            System.out.print(n+" ");
         }
 
         int cnt = 0;
