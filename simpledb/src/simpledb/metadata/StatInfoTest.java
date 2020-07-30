@@ -15,16 +15,16 @@ import java.io.IOException;
  */
 public class StatInfoTest {
     public static void main(String[] args) throws IOException {
-        SimpleDB.init("liuzhian/studentdb");
+        SimpleDB.init("lzadb");
         MetadataMgr metadataMgr = SimpleDB.metadataMgr();
 
         Transaction tx = new Transaction();
-        TableInfo tableInfo=metadataMgr.getTableInfo("student",tx);
-        StatInfo statInfo=metadataMgr.getStatInfo("student",tx);
+        TableInfo tableInfo=metadataMgr.getTableInfo("dept",tx);
+        StatInfo statInfo=metadataMgr.getStatInfo("dept",tx);
 
         System.out.println(statInfo.blocksAccessed() + " " +
                 statInfo.recordsOutput() + " " +
-                statInfo.distinctValues("majorid"));
+                statInfo.distinctValues("DName"));
         tx.commit();
 
     }

@@ -16,10 +16,10 @@ import java.util.Map;
  */
 public class IndexInfoTest {
     public static void main(String[] args) throws IOException {
-        SimpleDB.init("liuzhian/studentdb");
-        Transaction tx = new Transaction();
-        MetadataMgr metadataMgr = SimpleDB.metadataMgr();
-        Map<String,IndexInfo> indexes = metadataMgr.getIndexInfo("student", tx);
+        SimpleDB.init("lzadb");
+//        Transaction tx = new Transaction();
+//        MetadataMgr metadataMgr = SimpleDB.metadataMgr();
+//        Map<String,IndexInfo> indexes = metadataMgr.getIndexInfo("student", tx);
 
         // Part 1: Print the name and cost of each index on STUDENT
 //        for (String fieldName : indexes.keySet()) {

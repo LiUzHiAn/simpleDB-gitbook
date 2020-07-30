@@ -62,7 +62,9 @@ public class StatMgr {
         RecordFile tblCatRecordFile = new RecordFile(tblCatTableInfo, tx);
 
         // 更新每张表的数据统计信息
-        tblCatRecordFile.beforeFirst();
+        // TODO 新建一个RecordFile对象时会自动移到第一块，所以以下语句可以省略
+        // tblCatRecordFile.beforeFirst();
+        // TODO
         while (tblCatRecordFile.next()) {
             String tblName = tblCatRecordFile.getString("tblname");
             // 更新具体的某张表的统计信息
@@ -82,8 +84,9 @@ public class StatMgr {
         int numRecords = 0;
         TableInfo tableInfo = tableMgr.getTableInfo(tblName, tx);
         RecordFile recordFile = new RecordFile(tableInfo, tx);
-
+        // TODO 新建一个RecordFile对象时会自动移到第一块，所以以下语句可以省略
         recordFile.beforeFirst();
+        // TODO
         while (recordFile.next()) {
             numRecords++;
         }

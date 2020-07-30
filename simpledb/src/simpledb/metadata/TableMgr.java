@@ -27,7 +27,7 @@ public class TableMgr {
         Schema tblCatSchema = new Schema();
         tblCatSchema.addStringField("tblname", TABLE_AND_FIELD_NAME_MAX_LEN);
         tblCatSchema.addIntField("reclength");
-        tblCatInfo = new TableInfo("tblcat", tblCatSchema);
+        tblCatInfo = new TableInfo("tblcat", tblCatSchema);  // 存放在tblcat.tbl文件中
 
         // fldcat表
         Schema fldCatSchema = new Schema();
@@ -36,7 +36,7 @@ public class TableMgr {
         fldCatSchema.addIntField("type"); // 字段类型
         fldCatSchema.addIntField("length"); // 对于非字符串字段没什么意义
         fldCatSchema.addIntField("offset"); // 各字段偏移量
-        fldCatInfo = new TableInfo("fldcat", fldCatSchema);
+        fldCatInfo = new TableInfo("fldcat", fldCatSchema);  // 存放在fldcat.tbl文件中
 
         // catalog表tblcat和fldcat自身的schema信息也被存入元数据表中
         if (isNew) {
@@ -91,8 +91,8 @@ public class TableMgr {
         RecordFile tblCatRecordFile = new RecordFile(this.tblCatInfo, tx);
         int recordLen = -1;
         // 从最前面开始搜索
-        // TODO
-        tblCatRecordFile.beforeFirst(); // 原书代码中在这里漏了???
+        // TODO 新建一个RecordFile对象时会自动移到第一块，所以以下语句可以省略
+        // tblCatRecordFile.beforeFirst();
         // TODO
         while (tblCatRecordFile.next()) {
             if (tblCatRecordFile.getString("tblname").equals(tblName)) {
@@ -107,8 +107,8 @@ public class TableMgr {
         Schema schema = new Schema();
         Map<String, Integer> offsets = new HashMap<>();
         // 从最前面开始搜索
-        // TODO
-        fldCatRecordFile.beforeFirst(); // 是不是原书代码中在这里漏了 ???
+        // TODO 新建一个RecordFile对象时会自动移到第一块，所以以下语句可以省略
+        fldCatRecordFile.beforeFirst();
         // TODO
         while (fldCatRecordFile.next()) {
             if (fldCatRecordFile.getString("tblname").equals(tblName)) {

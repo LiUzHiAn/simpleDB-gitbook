@@ -63,7 +63,9 @@ public class ViewMgr {
         TableInfo viewCatTableInfo = this.tableMgr.getTableInfo("viewcat", tx);
         RecordFile viewCatRecordFile = new RecordFile(viewCatTableInfo, tx);
         // 遍历各个视图元数据
+        // TODO 新建一个RecordFile对象时会自动移到第一块，所以以下语句可以省略
         viewCatRecordFile.beforeFirst();
+        // TODO
         while (viewCatRecordFile.next()) {
             if (viewCatRecordFile.getString("viewname").equals(viewName)) {
                 result = viewCatRecordFile.getString("viewdef");
