@@ -58,7 +58,7 @@ public class Term {
         // 左边是字段名，右边是常量
         if (lhs.isFieldName() && lhs.asFieldName().equals(fldName) && rhs.isConstant())
             return rhs.asConstant();
-            // 左边是常量，右边是字段名
+        // 左边是常量，右边是字段名
         else if (rhs.isFieldName() && rhs.asFieldName().equals(fldName) && lhs.isConstant())
             return lhs.asConstant();
         else

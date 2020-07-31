@@ -23,7 +23,7 @@ public class Lexer {
         initKeywords();
         tokenizer = new StreamTokenizer(new StringReader(s));
         // 把'.'也视为一个字符，主要是为了到时候SQL中形如 stuTable.name的字段时，
-        // 识别成stuTable,','和name三个token，而不是视stuTable.name为一整个token
+        // 识别成stuTable,'.'和name三个token，而不是视stuTable.name为一整个token
         tokenizer.ordinaryChar('.');
         // 使关键字和标识符大小写不敏感
         tokenizer.lowerCaseMode(true);
