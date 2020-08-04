@@ -28,6 +28,7 @@ public class Planner {
         QueryData queryData=parser.query();
         //================ TODO ==================
         // 验证SQL语句语义正确性的代码
+        // 见 19.2 小节
         //================ TODO ==================
         return queryPlanner.createPlan(queryData,tx);
     }
@@ -36,6 +37,7 @@ public class Planner {
         Object obj=parser.updateCmd();
         //================ TODO ==================
         // 验证update SQL语句语义正确性的代码
+        // 见 19.2 小节
         //================ TODO ==================
         if(obj instanceof InsertData)
             return  updatePlanner.executeInsert((InsertData) obj,tx);

@@ -32,7 +32,7 @@ public class RemoteConnectionImpl extends UnicastRemoteObject
     }
 
     //=============以下方法都是在服务端中调用的================
-    Transaction getTrasnaction()
+    Transaction getTransaction()
     {
         return tx;
     }

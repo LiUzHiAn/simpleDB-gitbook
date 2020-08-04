@@ -17,7 +17,7 @@ import java.rmi.registry.Registry;
 public class Startup {
     public static void main(String args[]) throws Exception {
         // configure and initialize the database
-        SimpleDB.init(args[0]);
+        SimpleDB.init("lzadb");
 
         // 在指定端口创建RMI注册表
         Registry reg = LocateRegistry.createRegistry(1099);

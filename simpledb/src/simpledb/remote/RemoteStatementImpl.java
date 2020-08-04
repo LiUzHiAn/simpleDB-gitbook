@@ -27,7 +27,7 @@ public class RemoteStatementImpl extends UnicastRemoteObject
     @Override
     public RemoteResultSet executeQuery(String qry) throws RemoteException {
         try {
-            Transaction tx = rconn.getTrasnaction();
+            Transaction tx = rconn.getTransaction();
             Plan plan = SimpleDB.planner().createQueryPlan(qry, tx);
             return new RemoteResultSetImpl(plan, rconn);
         } catch (IOException e) {
@@ -40,7 +40,7 @@ public class RemoteStatementImpl extends UnicastRemoteObject
     @Override
     public int executeUpdateCmd(String cmd) throws RemoteException {
         try {
-            Transaction tx = rconn.getTrasnaction();
+            Transaction tx = rconn.getTransaction();
             int result = SimpleDB.planner().executeUpdate(cmd, tx);
             rconn.commit();
             return result;

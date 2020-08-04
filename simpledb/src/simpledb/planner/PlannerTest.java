@@ -22,7 +22,7 @@ import java.util.Iterator;
 public class PlannerTest {
 
     public static void main(String[] args) throws IOException {
-        SimpleDB.init("studentdb");
+        SimpleDB.init("lzadb");
 
         Planner planner = SimpleDB.planner();
         Transaction tx = new Transaction();
