@@ -82,7 +82,7 @@ public class IndexMgr {
                 String fldName = idxCatRecordFile.getString("fieldname");
 
                 IndexInfo indexInfo = new IndexInfo(idxName, tblName, fldName, tx);
-                result.put(tblName, indexInfo);
+                result.put(fldName, indexInfo);
             }
         }
         idxCatRecordFile.close();

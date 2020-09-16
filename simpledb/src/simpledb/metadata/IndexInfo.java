@@ -1,5 +1,6 @@
 package simpledb.metadata;
 
+import simpledb.index.HashIndex;
 import simpledb.index.Index;
 import simpledb.record.Schema;
 import simpledb.record.TableInfo;
@@ -48,16 +49,16 @@ public class IndexInfo {
      *
      * @return
      */
-//    public int blocksAccessed() {
-//        // 被索引的记录，每条的长度
-//        int recordLen = tableInfo.recordLength();
-//        // 一个块可以存储多少条索引
-//        int recordNumPerBlock = BLOCK_SIZE / recordLen;
-//        // 总块数
-//        int numBlocks = statInfo.recordsOutput() / recordNumPerBlock;
-//
-//        return BTreeIndex.searchCost(numBlocks, recordNumPerBlock);
-//    }
+    public int blocksAccessed() {
+        // 被索引的记录，每条的长度
+        int recordLen = tableInfo.recordLength();
+        // 一个块可以存储多少条索引
+        int recordNumPerBlock = BLOCK_SIZE / recordLen;
+        // 总块数
+        int numBlocks = statInfo.recordsOutput() / recordNumPerBlock;
+
+        return HashIndex.searchCost(numBlocks, recordNumPerBlock);
+    }
 
     public int recordsOutput() {
         return statInfo.recordsOutput()
@@ -71,10 +72,10 @@ public class IndexInfo {
             return Math.min(statInfo.distinctValues(fieldName), recordsOutput());
     }
 
-//    public Index open() {
-//        Schema sch = schema();
-//        return new BTreeIndex(idxName, sch, tx);
-//    }
+    public Index open() {
+        Schema sch = schema();
+        return new HashIndex(idxName, sch, tx);
+    }
 
     /**
      * 构造索引的schema，如下：
