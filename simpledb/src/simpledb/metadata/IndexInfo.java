@@ -1,6 +1,6 @@
 package simpledb.metadata;
 
-import simpledb.index.HashIndex;
+import simpledb.index.hash.HashIndex;
 import simpledb.index.Index;
 import simpledb.record.Schema;
 import simpledb.record.TableInfo;

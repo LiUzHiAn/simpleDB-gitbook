@@ -1,5 +1,6 @@
-package simpledb.index;
+package simpledb.index.hash;
 
+import simpledb.index.Index;
 import simpledb.query.Constant;
 import simpledb.query.TableScan;
 import simpledb.record.RID;
