@@ -36,6 +36,7 @@ public class BTreeLeaf {
 
     /**
      * 是否存在下一条dataval为this.searchKey的索引记录
+     *
      * @return
      */
     public boolean next() {
@@ -50,6 +51,7 @@ public class BTreeLeaf {
 
     /**
      * 返回当前索引记录的RID
+     *
      * @return
      */
     public RID getDataRID() {
@@ -58,14 +60,16 @@ public class BTreeLeaf {
 
     public void delete(RID datarid) {
         while (next()) {
-            if (getDataRID().equals(datarid))
+            if (getDataRID().equals(datarid)) {
                 contents.delete(currentSlot);
-            return;
+                return;
+            }
         }
     }
 
     /**
      * 插入一条新的索引记录，可能引发块拆分
+     *
      * @param datarid 新索引记录的datarid
      * @return 如果引发块拆分，则返回一个目录记录对象
      */
@@ -104,6 +108,7 @@ public class BTreeLeaf {
 
     /**
      * 判断是否存在溢出块
+     *
      * @return
      */
     private boolean tryOverflow() {

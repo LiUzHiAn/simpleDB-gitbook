@@ -1,5 +1,6 @@
 package simpledb.metadata;
 
+import simpledb.index.btree.BTreeIndex;
 import simpledb.index.hash.HashIndex;
 import simpledb.index.Index;
 import simpledb.record.Schema;
@@ -57,7 +58,7 @@ public class IndexInfo {
         // 总块数
         int numBlocks = statInfo.recordsOutput() / recordNumPerBlock;
 
-        return HashIndex.searchCost(numBlocks, recordNumPerBlock);
+        return BTreeIndex.searchCost(numBlocks, recordNumPerBlock);
     }
 
     public int recordsOutput() {
@@ -72,9 +73,9 @@ public class IndexInfo {
             return Math.min(statInfo.distinctValues(fieldName), recordsOutput());
     }
 
-    public Index open() {
+    public Index open() throws IOException {
         Schema sch = schema();
-        return new HashIndex(idxName, sch, tx);
+        return new BTreeIndex(idxName, sch, tx);
     }
 
     /**

@@ -97,7 +97,7 @@ public class BTreePage {
      * @return
      */
     public int getNumRecords() {
-        return tx.getInt(currentBlk, INT_SIZE);
+        return tx.getInt(currentBlk, INT_SIZE);  // 每个树页的第4-8个字节，表示的是这个页上现有多少条记录
     }
 
     /**

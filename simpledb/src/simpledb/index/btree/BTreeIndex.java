@@ -56,7 +56,7 @@ public class BTreeIndex implements Index {
                 minVal = new IntConstant(Integer.MIN_VALUE);
             else
                 minVal = new StringConstant("");
-            page.insertDir(0, minVal, 0);
+            page.insertDir(0, minVal, 0);   // 指向leafTable的block 0
             page.close();
         }
     }

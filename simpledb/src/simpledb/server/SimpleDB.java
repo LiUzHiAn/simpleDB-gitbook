@@ -4,6 +4,7 @@ import simpledb.buffer.BufferMgr;
 import simpledb.file.Block;
 import simpledb.file.FileMgr;
 import simpledb.file.Page;
+import simpledb.index.planner.IndexUpdatePlanner;
 import simpledb.log.LogMgr;
 import simpledb.metadata.MetadataMgr;
 import simpledb.metadata.TableMgr;
@@ -116,7 +117,7 @@ public class SimpleDB {
      */
     public static Planner planner() {
         QueryPlanner qp = new BasicQueryPlanner();
-        UpdatePlanner up = new BasicUpdatePlanner();
+        UpdatePlanner up = new IndexUpdatePlanner();
         return new Planner(qp, up);
     }
 }

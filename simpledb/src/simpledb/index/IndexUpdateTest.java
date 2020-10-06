@@ -1,12 +1,11 @@
 package simpledb.index;
 
+import simpledb.index.query.IndexSelectPlan;
+import simpledb.index.query.IndexSelectScan;
 import simpledb.metadata.IndexInfo;
 import simpledb.metadata.MetadataMgr;
 import simpledb.planner.Planner;
-import simpledb.query.Constant;
-import simpledb.query.Plan;
-import simpledb.query.TablePlan;
-import simpledb.query.TableScan;
+import simpledb.query.*;
 import simpledb.record.RID;
 import simpledb.server.SimpleDB;
 import simpledb.tx.Transaction;
@@ -18,7 +17,6 @@ import java.util.Map;
 public class IndexUpdateTest {
 
     public static void main(String[] args) throws IOException {
-        // suppose the STUDENT(sname varchar(5), majorid int) table already exists
         SimpleDB.init("studentDB");
         Transaction tx = new Transaction();
 
@@ -80,7 +78,7 @@ public class IndexUpdateTest {
 
                 // then delete the data record
                 stuScan.delete();
-                break; // todo why break here???
+                break; // 只删了一条名为Sam的数据,也只有一条
             }
         }
 

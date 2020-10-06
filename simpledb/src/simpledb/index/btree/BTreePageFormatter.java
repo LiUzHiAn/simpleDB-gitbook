@@ -17,7 +17,7 @@ import static simpledb.file.Page.INT_SIZE;
 public class BTreePageFormatter implements PageFormatter {
 
     private TableInfo tableInfo;
-    private int flag; // B树页的标志位
+    private int flag; // B树页的标志位,-1表示B树的叶子结点
 
     public BTreePageFormatter(TableInfo tableInfo, int flag) {
         this.tableInfo = tableInfo;
@@ -36,7 +36,7 @@ public class BTreePageFormatter implements PageFormatter {
     @Override
     public void format(Page p) {
         p.setInt(0, flag); // 标志位
-        p.setInt(INT_SIZE, 0); // 记录数格式化位0
+        p.setInt(INT_SIZE, 0); // 记录数格式化为0
         int recordLen = tableInfo.recordLength();
         for (int pos = INT_SIZE * 2; pos + recordLen <= BLOCK_SIZE; pos += recordLen)
             initializeDefaultRecord(p, pos);
