@@ -1,11 +1,6 @@
 # Summary
 
 * [介绍](README.md)
-* [常见问题](FAQ.md)
-* [Part 1](part1/part1.md)
-    * [第1章](part1/ch01.md)
-    * [第2章](part1/ch02.md)
-    * [第3章](part1/ch03.md)
 * [Part 3 SimpleDB内部实现](part3/part3.md)
     * [第12章——磁盘及文件管理](part3/ch12.md)
     * [第13章——内存管理](part3/ch13.md)
@@ -16,4 +11,5 @@
     * [第18章——SQL语句解析](part3/ch18.md)
     * [第19章——SQL Planning](part3/ch19.md)
     * [第20章——数据库服务](part3/ch20.md)
-
+* [Part 4 高效的查询处理](part4/part4.md)
+    * [第21章——索引](part4/ch21.md)
