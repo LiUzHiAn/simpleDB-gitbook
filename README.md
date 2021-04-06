@@ -1,7 +1,7 @@
 ## 1. Overview
-This is a simple relational database(named SimpleDB) implementation in Java. And this project is a playgorund-level database implementation described in the book "Database Design And Implementation" written by Edward Sciore, Boston College.
+This is a simple relational database(named SimpleDB) implementation in Java. And this project is a playground-level database implementation described in the book "Database Design And Implementation" written by Edward Sciore, Boston College.
 
-Just for educational use, I will follow the author to reimplemente the SimpleDB. I have commented some code in Chinese for convenient reading and trasnlated mainly chapters of part 3 in Chinese. You are also highly recommended to take a look about the original textbook which is really easy to understand.
+Just for educational use, I will follow the author to reimplemente the SimpleDB. I have commented some code in Chinese for convenient reading and translated mainly chapters of part 3 in Chinese. You are also highly recommended to take a look at the original textbook which is really easy to understand.
 
 这是一个简单的关系数据库（名为simpleDB）实现，Java语言实现，这是《Database Design And Implementation》作者Edward Sciore在书中提供的一个游乐场级别的数据库实现。 为了方便学习使用，我会跟随作者的脚步去再次实现这个数据库。为方便大家阅读代码，我已经将部分关键代码添加了中文注释，并且尝试翻译了原书第3部分中的绝大部分章节，但仍然建议配合原书一起使用，因为相较于中文，英文没有那么地晦涩并且歧义更少，理解起来更简单。
 
@@ -82,7 +82,7 @@ ___
 目前只翻译了第12—21章，由于本人时间有限，因此会不定时地更新本译本，欢迎任何人共同加入到翻译此书的工作中来，如果你有意向，email联系，也欢迎直接pull request。
 
 #### 4. 如何获得本书？
-1. 你可以直接打开[SimpleDB中文版gitbook](https://liuzhian.gitbook.io/simpledb/)查看。
+1. 你可以直接打开[SimpleDB中文版gitbook](https://929910266.gitbook.io/simpledb/)查看。
 2. 你也可以在本地安装nodejs和gitbook，并且编译成PDF文件格式查看。
 
 ***本仓库所有译本只是本人学习时所翻译，默认可以转载，但请注明出处，也请勿用于任何商业用途。***
